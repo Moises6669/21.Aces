@@ -15,6 +15,8 @@ const btnPedir = document.querySelector("#btnPedir");
 const btnNuevo = document.querySelector("#btnNuevo");
 const btnDetener = document.querySelector("#btnDetener");
 
+const divCartasJugador = document.querySelector("#jugador-cartas");
+
 let small = document.querySelectorAll("small");
 
 //puntos jugador
@@ -60,4 +62,18 @@ btnPedir.addEventListener("click", (e) => {
   const carta = pedirCarta();
   puntosjugador = puntosjugador + valorCarta(carta);
   small[0].innerText = puntosjugador;
+
+  const imgCarta = document.createElement("img");
+  imgCarta.classList.add("carta");
+  imgCarta.src = `assets/img/cartas/${carta}.png`;
+  divCartasJugador.append(imgCarta);
+
+  if (puntosjugador > 21) {
+    console.warn("lo siento mucho, perdiste");
+    btnPedir.disabled = true;
+    btnPedir.style.backgroundColor = "#6d6875";
+    btnPedir.style.borderColor = "#6d6875";
+  } else if (puntosjugador === 21) {
+    console.warn("21,genial!");
+  }
 });
