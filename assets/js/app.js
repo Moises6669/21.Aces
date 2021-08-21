@@ -16,6 +16,7 @@ const btnNuevo = document.querySelector("#btnNuevo");
 const btnDetener = document.querySelector("#btnDetener");
 
 const divCartasJugador = document.querySelector("#jugador-cartas");
+const divCartasComputadora = document.querySelector("#computadora-cartas");
 
 let small = document.querySelectorAll("small");
 
@@ -56,6 +57,24 @@ const valorCarta = (carta) => {
 
   return isNaN(valor) ? (valor === "A" ? 11 : 10) : valor * 1;
 };
+
+const turnoComputadora = (puntosMinimos) => {
+  do {
+    const carta = pedirCarta();
+    puntosComputadora = puntosComputadora + valorCarta(carta);
+    small[1].innerText = puntosComputadora;
+
+    const imgCarta = document.createElement("img");
+    imgCarta.classList.add("carta");
+    imgCarta.src = `assets/img/cartas/${carta}.png`;
+    divCartasComputadora.append(imgCarta);
+
+    if (puntosMinimos > 21) {
+      break;
+    }
+  } while (puntosComputadora < puntosMinimos && puntosMinimos <= 21);
+};
+
 crearDeck();
 //Eventos
 btnPedir.addEventListener("click", (e) => {
@@ -71,9 +90,20 @@ btnPedir.addEventListener("click", (e) => {
   if (puntosjugador > 21) {
     console.warn("lo siento mucho, perdiste");
     btnPedir.disabled = true;
+    btnDetener.disabled = true;
     btnPedir.style.backgroundColor = "#6d6875";
     btnPedir.style.borderColor = "#6d6875";
+    turnoComputadora(puntosjugador);
   } else if (puntosjugador === 21) {
     console.warn("21,genial!");
+    btnPedir.disabled = true;
+    btnDetener.disabled = true;
+    turnoComputadora(puntosjugador);
   }
+});
+
+btnDetener.addEventListener('click',(e)=>{
+  btnPedir.disabled = true;
+  btnDetener.disabled = true;
+  turnoComputadora(puntosjugador);
 });
