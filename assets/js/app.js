@@ -10,6 +10,10 @@ let deck = [];
 const tipos = ["C", "D", "H", "S"];
 const especiales = ["A", "J", "Q", "K"];
 
+//puntos jugador
+let puntosjugador = 0,
+  puntosComputadora = 0;
+
 //referencias HTML
 const btnPedir = document.querySelector("#btnPedir");
 const btnNuevo = document.querySelector("#btnNuevo");
@@ -20,28 +24,27 @@ const divCartasComputadora = document.querySelector("#computadora-cartas");
 
 let small = document.querySelectorAll("small");
 
-//puntos jugador
-let puntosjugador = 0,
-  puntosComputadora = 0;
+
 
 /**Crea una nueva baraja */
 const crearDeck = () => {
   for (let i = 2; i <= 10; i++) {
-    for (const tipo of tipos) {
+    for (let tipo of tipos) {
       deck.push(i + tipo);
     }
   }
 
-  for (const tipo of tipos) {
-    for (const especial of especiales) {
+  for (let tipo of tipos) {
+    for (let especial of especiales) {
       deck.push(especial + tipo);
     }
   }
 
   deck = _.shuffle(deck);
-
-  console.log(deck);
+  return deck;
 };
+
+crearDeck();
 
 /**Funcion para pedir carta */
 const pedirCarta = () => {
@@ -73,9 +76,21 @@ const turnoComputadora = (puntosMinimos) => {
       break;
     }
   } while (puntosComputadora < puntosMinimos && puntosMinimos <= 21);
+
+  setTimeout(() => {
+    if (puntosComputadora === puntosMinimos) {
+      alert("Nadie Gana");
+    } else if (puntosMinimos > 21) {
+      alert("la computadora gana");
+    } else if (puntosComputadora > 21) {
+      alert("Jugador Gana");
+    }else{
+      alert('Computadora gana')
+    }
+  }, 10);
 };
 
-crearDeck();
+
 //Eventos
 btnPedir.addEventListener("click", (e) => {
   const carta = pedirCarta();
@@ -102,8 +117,26 @@ btnPedir.addEventListener("click", (e) => {
   }
 });
 
-btnDetener.addEventListener('click',(e)=>{
+
+
+
+btnDetener.addEventListener("click", (e) => {
   btnPedir.disabled = true;
   btnDetener.disabled = true;
   turnoComputadora(puntosjugador);
 });
+
+btnNuevo.addEventListener("click",(e)=>{ 
+  console.clear();
+  deck = [];
+  deck = crearDeck();
+  puntosjugador = 0;
+  puntosComputadora = 0;
+  small[0].innerText = 0;
+  small[1].innerText = 0;
+  divCartasComputadora.innerHTML = '';
+  divCartasJugador.innerHTML = '';
+  btnPedir.disabled = false;
+  btnDetener.disabled = false;
+})
+ 
