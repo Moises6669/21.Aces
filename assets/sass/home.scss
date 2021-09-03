@@ -1,9 +1,18 @@
-$color_letra: #ffff;
+/*Google Fonts*/
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+/*Colors and Shadows*/
+$shadow_input: -4px 7px 13px -3px rgba(0, 0, 0, 0.56);
+$input: #f0fff3;
+$side_form: #f3f1f5;
+$side_image: #17b978;
+$color_letra: #ffff;
+/*Fonts*/
+$fuente: "Roboto", sans-serif;
 
-@mixin centrado($justify: center) {
+@mixin centrado() {
   display: flex;
-  justify-content: $justify;
+  justify-content: center;
   align-items: center;
 }
 
@@ -11,30 +20,22 @@ $color_letra: #ffff;
   margin: 0;
   padding: 0;
 }
-
-body {
-  overflow-y: hidden;
-}
-
 .contenedor {
-  @include centrado();
   height: 100vh;
   display: grid;
   grid-template-columns: 50% 50%;
 }
 
 .form_user {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include centrado();
   height: 100%;
   width: 100%;
   flex-direction: column;
-  background-color: #f3f1f5;
+  background-color: $side_form;
   label {
     margin: 5px;
     font-size: 25px;
-    font-family: "Roboto", sans-serif;
+    font-family: $fuente;
     text-transform: uppercase;
   }
   input {
@@ -42,38 +43,40 @@ body {
     padding: 4px;
     text-transform: none;
     width: 250px;
-    border-radius: 10px;
-    background-color: #F0FFF3;
-    font-family: "Roboto", sans-serif;
+    border-radius: 40px 40px 40px 40px;
+    background-color: $input;
+    font-family: $fuente;
     border: 0;
     outline: none;
     font-size: 18px;
-    box-shadow: -4px 7px 13px -3px rgba(0,0,0,0.56);
+    box-shadow: $shadow_input;
   }
 }
-
 .imagen {
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  @include centrado();
   width: 100%;
   height: 100vh;
-  background-color: #17b978;
+  background-color: $side_image;
   img {
     width: 450px;
     height: 100%;
   }
 }
-
 .enviar {
   margin: 10px;
   text-transform: uppercase;
   padding: 3px;
-  width: 200px;
-  background-color: #17b978;
+  width: 250px;
+  height: 30px;
+  font-family: $fuente;
+  background-color: $side_image;
   color: #f3f1f5;
   font-size: 15px;
   border-radius: 40px 40px 40px 40px;
-  box-shadow: -4px 4px 11px -3px rgba(0,0,0,0.8);
+  box-shadow: $shadow_input;
+  transition: all 200ms ease-in;
   border: 0;
+  &:hover {
+    background-color: #1bda8d;
+  }
 }
