@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/home.css" />
+    <title>Home</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/home.css">
-  <title>Home</title>
-</head>
+  <body>
+    <div class="contenedor">
+      <form class="form_user" id="formulario">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="Ken Uston"
+          autocomplete="off"
+        />
+        <button class="enviar">Aceptar</button>
+      </form>
 
-<body>
-  <div class="contenedor">
-
-    <form class="form_user">
-      <label for="username">Username</label>
-      <input type="text" name="username" id="username" required placeholder="Ken Uston">
-      <button class="enviar">Aceptar</button>
-    </form>
-
-    <div class="imagen">
-      <img src="assets/img/fondos/king_icon_126720.svg" alt="">
+      <div class="imagen">
+        <img src="assets/img/fondos/king_icon_126720.svg" alt="" />
+      </div>
     </div>
-  </div>
-</body>
 
+    <script src="assets/js/user.js"></script>
+  </body>
 </html>

@@ -21,10 +21,13 @@ const btnDetener = document.querySelector("#btnDetener");
 
 const divCartasJugador = document.querySelector("#jugador-cartas");
 const divCartasComputadora = document.querySelector("#computadora-cartas");
-
 let small = document.querySelectorAll("small");
 
+let jugadorH1 = document.getElementById("jugador");
 
+/**Obteniendo Username del jugador */
+let username = localStorage.getItem("username");
+jugadorH1.innerText = username;
 
 /**Crea una nueva baraja */
 const crearDeck = () => {
@@ -84,12 +87,11 @@ const turnoComputadora = (puntosMinimos) => {
       alert("la computadora gana");
     } else if (puntosComputadora > 21) {
       alert("Jugador Gana");
-    }else{
-      alert('Computadora gana')
+    } else {
+      alert("Computadora gana");
     }
   }, 10);
 };
-
 
 //Eventos
 btnPedir.addEventListener("click", (e) => {
@@ -117,16 +119,13 @@ btnPedir.addEventListener("click", (e) => {
   }
 });
 
-
-
-
 btnDetener.addEventListener("click", (e) => {
   btnPedir.disabled = true;
   btnDetener.disabled = true;
   turnoComputadora(puntosjugador);
 });
 
-btnNuevo.addEventListener("click",(e)=>{ 
+btnNuevo.addEventListener("click", (e) => {
   console.clear();
   deck = [];
   deck = crearDeck();
@@ -134,9 +133,8 @@ btnNuevo.addEventListener("click",(e)=>{
   puntosComputadora = 0;
   small[0].innerText = 0;
   small[1].innerText = 0;
-  divCartasComputadora.innerHTML = '';
-  divCartasJugador.innerHTML = '';
+  divCartasComputadora.innerHTML = "";
+  divCartasJugador.innerHTML = "";
   btnPedir.disabled = false;
-  btnDetener.disabled = false;
-})
- 
+  btnDetener.disabled = false; 
+});
